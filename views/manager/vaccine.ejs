@@ -1,0 +1,68 @@
+<% include ../partials/head.ejs %>
+    <title>Vaccine</title>
+    </head>
+
+    <body>
+        <% include ../partials/navbar.ejs %>
+         
+            <div class="d-flex" id="wrapper">
+                <div class="container-fluid">
+                    <div class="row mt-2  justify-content-around">
+                        <div class="col-4">
+                            <form class="form-inline">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="inputPassword2" class="sr-only">search</label>
+                                    <input type="text" class="form-control" id="inputPassword2" placeholder="search" disabled>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2" disabled>Find</button>
+                                <a class="btn btn-success ml-5 mb-2" href="addvaccine">Add</a>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- <div class="container row">
+                    <div class="col text-right">
+                        <a class="btn btn-success" href="#">Add</a>
+                    </div>
+                </div> -->
+                <h2 class="text-center">Avalible Vaccines</h2>
+                    <div class="row justify-content-around mt-4">
+                        <div class="col-8">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Does</th>
+                                        <th scope="col">Min Age</th>
+                                        <th scope="col">Count</th>
+                                        <th scope="col">Expire Date</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0; i < vaccines.length ; i++) {%>
+                                        <tr>
+                                            <th scope="row"> <%= i+1 %></th>
+                                            <td> <%= vaccines[i].vaccineType.name %> </td>
+                                            <td> <%= vaccines[i].vaccineType.numberOfDoes %> </td>
+                                            <td> <%= vaccines[i].vaccineType.minAge %> </td>
+                                            <td> <%= vaccines[i].count %> </td>
+                                            <td> <%= vaccines[i].expireDate.toISOString().split("T")[0] %> </td>
+                                            <td class="text-right">
+                                                <a class="btn btn-secondary" href="#">Details</a>
+                                                <a class="btn btn-info" href="#">Edit</a>
+                                                <a class="btn btn-danger" href="#">Delete</a>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#wrapper -->
+    </body>
+
+    </html>

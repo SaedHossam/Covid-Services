@@ -1,0 +1,58 @@
+<% include ../partials/head.ejs %>
+    <title>Manager</title>
+    </head>
+
+    <body>
+        <% include ../partials/navbar.ejs %>
+            <div class="container">
+
+
+
+                <div class="d-flex" id="wrapper">
+                    <div class="container-fluid">
+                        <div class="row mt-2  justify-content-around">
+                            <h1>Add Vaccine</h1>
+                            <div class="col-12">
+                                <!-- Add Vaccine -->
+                                <form method="POST">
+                                    
+                                    <div class="form-group">
+                                        <label for="vaccineType">Vaccine Type</label>
+                                        <select class="form-control" id="vaccineType" name="vaccineType">
+                                            <% vaccineType.forEach(function(item){ %>
+                                                <option value='<%= item._id %>'>
+                                                    <%= item.name %>
+                                                </option>
+                                            <% }) %>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="count">Count</label>
+                                        <input type="number" class="form-control" id="count" name="count" min="1"
+                                            placeholder="Avalible Quantity" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="expireDate">Expire Date</label>
+                                        <input type="date" class="form-control" id="expireDate" name="expireDate"
+                                            placeholder="Expire Date" min="<%= Date.now %>" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="Add" >
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $('#expireDate').attr({min: new Date().toISOString().split("T")[0]});
+                
+            </script>
+    </body>
+
+    </html>

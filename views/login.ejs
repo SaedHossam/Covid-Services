@@ -1,0 +1,31 @@
+<% include ./partials/head.ejs %>
+	<title>Login</title>
+	<!-- <link rel="stylesheet" href="/css/login.css"> -->
+	</head>
+
+	<body>
+		<% include ./partials/navbar.ejs %>
+		<div class="container">
+				<div class="row justify-content-around mt-3">
+					<div class="col-md-4 text-center">
+						<h1>Login</h1>
+						<form action="/auth/login" method="POST">
+							<div class="form-group">
+								<input type="text" name='email' placeholder="Email" class="form-control" required
+									autofocus>
+							</div>
+							<div class="form-group">
+								<input type="password" name='password' placeholder="Password" class="form-control"
+									required>
+							</div>
+							<button type="submit" class="btn btn-success">Login</button>
+						</form>
+						<h4>Or <a href="/auth/signup">Signup</a></h4>
+					</div>
+				</div>
+		</div>
+
+		<% include ./partials/footer.ejs %>
+	</body>
+
+	</html>

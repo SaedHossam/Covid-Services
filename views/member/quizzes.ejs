@@ -1,0 +1,57 @@
+<% include ../partials/head.ejs %>
+    <title>Manager</title>
+    </head>
+
+    <body>
+        <% include ../partials/navbar.ejs %>
+
+            <div class="d-flex" id="wrapper">
+                <div class="container-fluid">
+                    <div class="row mt-2  justify-content-around">
+                        <div class="col-4">
+                            <form class="form-inline">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="inputPassword2" class="sr-only">search</label>
+                                    <input type="text" class="form-control" id="inputPassword2" placeholder="search" disabled>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2" disabled>Find</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-around mt-4">
+                        <div class="col-8">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Sub Category</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0; i < quizList.length ; i++) {%>
+                                    <tr>
+                                        <th scope="row"> <%= i+1 %></th>
+                                        <td> <%= quizList[i].quiz.name %> </td>
+                                        <td> <%= quizList[i].quiz.description %> </td>
+                                        <td> <%= quizList[i].quiz.category.name %> </td>
+                                        <td> <%= quizList[i].quiz.subCategory.name %> </td>
+                                        <td class="text-right">
+                                            <a class="btn btn-secondary" href="#">Take</a>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#wrapper -->
+    </body>
+
+    </html>

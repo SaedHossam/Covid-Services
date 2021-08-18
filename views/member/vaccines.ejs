@@ -1,0 +1,102 @@
+<% include ../partials/head.ejs %>
+    <title>Vaccine</title>
+    </head>
+
+    <body>
+        <% include ../partials/navbar.ejs %>
+            <div class="d-flex" id="wrapper">
+                <div class="container-fluid">
+                    <div class="row mt-2  justify-content-around">
+                        <div class="col-4">
+                            <form class="form-inline">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="vaccineType" class="mr-3"> Vaccine Type </label>
+                                    <select class="form-control" id="vaccineType" name="vaccineType" onchange="filterTable()">
+                                        <option></option>
+                                        <% vaccineType.forEach(function(item){ %>
+                                            <option value='<%= item._id %>'>
+                                                <%= item.name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- <div class="container row">
+                    <div class="col text-right">
+                        <a class="btn btn-success" href="#">Add</a>
+                    </div>
+                </div> -->
+                    <h2 class="text-center">Avalible Vaccines</h2>
+                    <div class="row justify-content-around mt-4">
+                        <div class="col-8">
+                            <table class="table table-bordered" id="vaccineList">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Does</th>
+                                        <th scope="col">Min Age</th>
+                                        <th scope="col">Hospital</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0; i < vaccines.length ; i++) {%>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= i+1 %>
+                                            </th>
+                                            <td>
+                                                <%= vaccines[i].vaccineType.name %>
+                                            </td>
+                                            <td>
+                                                <%= vaccines[i].vaccineType.numberOfDoes %>
+                                            </td>
+                                            <td>
+                                                <%= vaccines[i].vaccineType.minAge %>
+                                            </td>
+                                            <td>
+                                                <%= vaccines[i].Owner.email %>
+                                            </td>
+
+                                            <td class="text-center">
+                                                <a class="btn btn-secondary" href="#">Reserve</a>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function filterTable() {
+                    // Declare variables
+                    var filter, table, tr, td, i, txtValue;
+                    filter = $('#vaccineType').find(":selected").text().toUpperCase();
+                    table = document.getElementById("vaccineList");
+                    tr = table.getElementsByTagName("tr");
+
+                    // Loop through all table rows, and hide those who don't match the search query
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
+    </body>
+
+    </html>
