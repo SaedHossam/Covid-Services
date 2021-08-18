@@ -6,14 +6,18 @@ const logger = require('morgan')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport')
+const dotenv = require('dotenv');
 // MongoDB Driver
 const mongoose = require('mongoose')
 
+// configure enviroment variables
+dotenv.config();
+
+
 const port = 3000;
 
-const DB_URI = "mongodb+srv://Saed:1234@test-cluster.51nrg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 // Connect to MongoDB
-mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // CONNECTION EVENTS
 mongoose.connection.once('connected', function () {
@@ -47,13 +51,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     name: 'sessionId',
-    secret: "mysecretkeythatiwillnottellyou",
+    secret: process.env.SECRET,
     saveUninitialized: false, // don't create sessions for not logged in users
     resave: false, //don't save session if unmodified
 
     // Where to store session data
     store: MongoStore.create({
-        mongoUrl: DB_URI
+        mongoUrl: process.env.DB_URI
     }),
 
     // cookies settings

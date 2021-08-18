@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const VaccineType = require('../models/VaccineType');
 const Vaccine = require('../models/Vaccine');
-const UserQuiz = require('../models/UserQuize');
+
 const userService = require('../services/userService');
 
 router.get('/', function (req, res, next) {
@@ -28,27 +28,5 @@ router.get('/vaccines', function (req, res) {
   }
 });
 
-
-// get all quizzes from userQuiz
-router.get('/quizzes', function (req, res, next) {
-  if (req.isAuthenticated() && userService.isMember(req.user)) {
-    UserQuiz.find({}).populate({
-      path: 'quiz',
-      populate: {
-        path: 'category'
-      }
-    }).populate({
-      path: 'quiz',
-      populate: {
-        path: 'subCategory'
-      }
-    }).exec(function (err, quizzes) {
-
-      res.render('member/quizzes', { quizList: quizzes })
-    });
-  } else {
-    res.sendStatus(403);
-  }
-});
 
 module.exports = router;
